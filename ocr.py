@@ -10,7 +10,12 @@ WINDOWS_SS_PATH = os.getenv("LOCALAPPDATA") + "/Packages/"
 WINDOWS_SS_SUB_FOLD = [f for f in os.listdir(WINDOWS_SS_PATH) if f.startswith("MicrosoftWindows.Client.")][0]
 WINDOWS_SS_PATH += f"{WINDOWS_SS_SUB_FOLD}/TempState/ScreenClip"
 
+LANGS = ["ENGLISH", "TRADITIONAL CHINESE", "SIMPLIFIED CHINESE", "KOREAN", "JAPANESE"]
+LANGS_KEY = ["eng", "tra_chi", "sim_chi", "kor", "jpn"]
+SELECTIONS = "\n".join([f"{str(i+1)}. {l}" for i, l in enumerate(LANGS)])
+
 while True:
+    choice = int(input(f"\nLanguages available:\n{SELECTIONS}\nInput: "))
     img_path = input("\nFilepath [ENTER TO USE RECENT SCREENSHOT / CTRL + C TO QUIT]: ").replace('"', "").replace("\\", "/")
 
     # Getting the most recent screenshot image
@@ -33,7 +38,8 @@ while True:
             print("File not supported, only image files are supported.\n")
             continue
 
-    text = pytesseract.image_to_string(img)
+    # Available langauges: eng, kor, jpn, chi_tra, chi_sim
+    text = pytesseract.image_to_string(img, lang=LANGS_KEY[choice-1])
     print(text)
     print("\n-------------------------------------------------")
 
