@@ -18,7 +18,7 @@ Using [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
    1. For example:
    - Target: ```C:\Windows\System32\cmd.exe /K "D:\Project\Python\2022\Screenshot2Text\env\Scripts\activate.bat" && ocr.py```
    - Start in: ```D:\Project\Python\2022\Screenshot2Text```
-7. For more langauges, download at https://github.com/tesseract-ocr/tessdata and put those into the C:\Prorgam Files\Tesseract-OCR\tessdata
+7. For more languages, download at https://github.com/tesseract-ocr/tessdata and put those into the C:\Prorgam Files\Tesseract-OCR\tessdata
 
 ### Linux Setup
 - Later in the future
@@ -29,6 +29,7 @@ Using [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
 3. The output will be copied to your clipboard directly
 
 ## Future work
+- [ ] PyQt a simple UI / Streamlit
 - [ ] Compaitible for Linux
 - [ ] Google Chrome and Firefox extension for extracting the text
 - [ ] Preprocess the image by inverting the dark image into bright image for better tesseract extraction.

@@ -11,7 +11,7 @@ WINDOWS_SS_SUB_FOLD = [f for f in os.listdir(WINDOWS_SS_PATH) if f.startswith("M
 WINDOWS_SS_PATH += f"{WINDOWS_SS_SUB_FOLD}/TempState/ScreenClip"
 
 LANGS = ["ENGLISH", "TRADITIONAL CHINESE", "SIMPLIFIED CHINESE", "KOREAN", "JAPANESE"]
-LANGS_KEY = ["eng", "tra_chi", "sim_chi", "kor", "jpn"]
+LANGS_KEY = ["eng", "chi_tra", "chi_sim", "kor", "jpn"]
 SELECTIONS = "\n".join([f"{str(i+1)}. {l}" for i, l in enumerate(LANGS)])
 
 while True:
