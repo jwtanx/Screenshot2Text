@@ -1,5 +1,6 @@
 import os
-import sys
+import gdown
+import requests
 from PIL import Image
 import pytesseract
 import pyperclip
@@ -14,9 +15,26 @@ LANGS = ["ENGLISH", "TRADITIONAL CHINESE", "SIMPLIFIED CHINESE", "KOREAN", "JAPA
 LANGS_KEY = ["eng", "chi_tra", "chi_sim", "kor", "jpn"]
 SELECTIONS = "\n".join([f"{str(i+1)}. {l}" for i, l in enumerate(LANGS)])
 
+IMG_EXT = ["png", "jpg", "jpeg", "tiff", "bmp", "webp"]
+DOWNLOAD_DIR  = "temp"
+BASEPATH = os.path.abspath(".")
+
+if not os.path.isdir(DOWNLOAD_DIR):
+    os.mkdir(DOWNLOAD_DIR)
+
 while True:
-    choice = int(input(f"\nLanguages available:\n{SELECTIONS}\nInput: "))
-    img_path = input("\nFilepath [ENTER TO USE RECENT SCREENSHOT / CTRL + C TO QUIT]: ").replace('"', "").replace("\\", "/")
+
+    try:
+        choice = int(input(f"\nLanguages available:\n{SELECTIONS}\nInput [Type 0 to quit]: "))
+        if choice == 0:
+            break
+        elif not (0 < choice <= len(LANGS)):
+            print(f"Enter between 1 and {len(LANGS)}")
+            continue
+    except:
+        continue
+
+    img_path = input("\nFilepath or URL [ENTER TO USE RECENT SCREENSHOT / CTRL + C TO QUIT]: ").replace('"', "").replace("\\", "/")
 
     # Getting the most recent screenshot image
     if img_path == "":
@@ -32,6 +50,38 @@ while True:
 
     # Using the current paste filepath
     else:
+        tmp_url = img_path.lower()
+        if tmp_url.startswith("http"):
+            for ex in IMG_EXT:
+                if tmp_url.endswith(ex):
+                    # Download the file
+                    filename = tmp_url.split("/")[-1]
+                    ext = os.path.splitext(filename)[1].lower()
+                    response = requests.get(img_path, stream=True)
+                    
+                    if response.ok:
+                        img_path = f"{DOWNLOAD_DIR}/{filename}" 
+                        with open(img_path, "wb") as fd:
+                            for chunk in response.iter_content(2000):
+                                fd.write(chunk)
+                    else:
+                        print(f"ERROR: CONNECTION ERROR {img_path}")
+                    
+                    break
+
+
+            if img_path.lower().startswith("https://drive.google.com/file/d/"):
+                try:
+                    # Donwload the Google file
+                    os.chdir(DOWNLOAD_DIR)
+                    filename = gdown.download(url=img_path, quiet=True, fuzzy=True, use_cookies=False)
+                    img_path = f"{DOWNLOAD_DIR}/{filename}"
+                    os.chdir(BASEPATH)
+
+                    # Getting the latest file and 
+                except Exception as e:
+                    print(e)
+
         try:
             img = Image.open(img_path).convert("1")
         except Exception as e:

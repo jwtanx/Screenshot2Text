@@ -29,6 +29,8 @@ Using [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
 3. The output will be copied to your clipboard directly
 
 ## Future work
+- [x] URL images
+- [x] Google drive link
 - [ ] PyQt a simple UI / Streamlit
 - [ ] Compaitible for Linux
 - [ ] Google Chrome and Firefox extension for extracting the text
