@@ -6,11 +6,11 @@ Using [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
 - Converting the recent screenshotted image into text
 
 ### Windows Setup
-1. Creating an virtual environment using Python >= 3.8  
+1. Creating an virtual environment using Python >= 3.8
    ```py 3.8 -m venv env```
-2. Activate the env  
+2. Activate the env
    ```env\Scripts\activate.bat```
-3. Installing the Python libraries  
+3. Installing the Python libraries
    ```pip install -r requirements.txt```
 4. Download **unofficial** Tesseract for Windows: [tesseract-ocr-w64-setup-v5.1.0.20220510.exe (64 bit)](https://github.com/UB-Mannheim/tesseract/wiki)
 5. Adding the path of [Tesseract](https://github.com/maxenxe/HQ-Trivia-Bot-NOT-MAINTAINED-/issues/51)
@@ -21,7 +21,31 @@ Using [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
 7. For more languages, download at https://github.com/tesseract-ocr/tessdata and put those into the C:\Prorgam Files\Tesseract-OCR\tessdata
 
 ### Linux Setup
-- Later in the future
+1. Install Tesseract
+```sh
+sudo apt update
+sudo add-apt-repository ppa:alex-p/tesseract-ocr-devel
+sudo apt install -y tesseract-ocr
+sudo apt update
+tesseract -–version
+```
+2. Create Python virtual environment and activate it
+```sh
+python3.10 -m venv env
+. env/bin/activate
+```
+3. Install dependencies
+```sh
+pip install -r requirements.txt
+```
+4. For more languages
+   - Method 1: Download at https://github.com/tesseract-ocr/tessdata, then copy the file to `/usr/share/tesseract-ocr/<version>/tessdata`
+   - Method 2: `sudo apt-get install tesseract-ocr-[lang]`
+
+5. For simplicity of opening it, add a new shortcut with you own custom key
+   ```gnome-terminal --window-with-profile=Mini -x bash -c 'cd /home/<username>/Desktop/personal/Screenshot2Text ; source <venv-name>/bin/activate ; python ocr.py ; deactivate'```
+   - Optional: `--window-with-profile=Mini`
+   - Reference: https://askubuntu.com/questions/1072688/what-is-the-difference-between-the-e-and-x-options-for-gnome-terminal
 
 ## How to use?
 1. Run the script
@@ -31,7 +55,7 @@ Using [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
 ## Future work
 - [x] URL images
 - [x] Google drive link
-- [ ] PyQt a simple UI / Streamlit
-- [ ] Compaitible for Linux
+- [x] Compaitible for Linux
+- [ ] PyQt a simple UI
 - [ ] Google Chrome and Firefox extension for extracting the text
 - [ ] Preprocess the image by inverting the dark image into bright image for better tesseract extraction.
