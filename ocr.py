@@ -19,6 +19,8 @@ if USER_OS == "Window":
   SS_PATH += f"{WINDOWS_SS_SUB_FOLD}/TempState/ScreenClip"
 elif USER_OS == "Linux":
   SS_PATH = f"/home/{os.getenv('USERNAME')}/Pictures/Screenshots"
+elif USER_OS == "Darwin":
+  SS_PATH = f"/Users/{os.getenv('USER')}/Desktop"
 else:
   raise NotImplementedError(f"{USER_OS} not supported yet")
 
@@ -66,7 +68,7 @@ while True:
 
       # Comparing which files is the larger one
       img = img_1 if os.path.getsize(img_1) > os.path.getsize(img_2) else img_2
-    elif USER_OS == "Linux":
+    else:
       img = f"{SS_PATH}/{img_path_list[0]}"
 
   # Using the current paste filepath

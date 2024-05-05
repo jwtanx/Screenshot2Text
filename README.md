@@ -47,6 +47,27 @@ pip install -r requirements.txt
    - Optional: `--window-with-profile=Mini`
    - Reference: https://askubuntu.com/questions/1072688/what-is-the-difference-between-the-e-and-x-options-for-gnome-terminal
 
+### Mac OS Setup
+1. Install Tesseract
+```zsh
+brew install tesseract
+tesseract --list-langs
+```
+2. Create Python virtual environment and activate it
+```sh
+python3.12 -m venv env
+. env/bin/activate
+```
+3. Install dependencies
+```sh
+pip3 install -r requirements.txt
+```
+4. To install the all languages
+```zsh
+brew install tesseract --all-languages 
+```
+OR copy the required files from this [folder](./langs) to /opt/homebrew/share/tessdata/
+
 ## How to use?
 1. Run the script
 2. Enter to use the recent screenshot image to convert OR paste the image filepath
@@ -55,7 +76,10 @@ pip install -r requirements.txt
 ## Future work
 - [x] URL images
 - [x] Google drive link
-- [x] Compaitible for Linux
+- [x] Compatible for Linux
+- [x] Compatible for Mac OS
 - [ ] PyQt a simple UI
 - [ ] Google Chrome and Firefox extension for extracting the text
 - [ ] Preprocess the image by inverting the dark image into bright image for better tesseract extraction.
+- [ ] Multimodel image description generation
+- [ ] LLM for answering simple question in PyQt
