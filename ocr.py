@@ -1,4 +1,5 @@
 import os
+import re
 import gdown
 import platform
 import requests
@@ -115,6 +116,11 @@ while True:
 
   # Available langauges: eng, kor, jpn, chi_tra, chi_sim
   text = pytesseract.image_to_string(img, lang=LANGS_KEY[choice - 1])
+
+  # Preprocess the text
+  # Replace special double quotes (`“` and `”`) into standard quotes (`"`)
+  text = re.sub(r"“|”", '"', text)
+  
   print(text)
   print("\n-------------------------------------------------")
 

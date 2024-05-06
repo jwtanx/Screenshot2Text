@@ -67,6 +67,11 @@ pip3 install -r requirements.txt
 brew install tesseract --all-languages 
 ```
 OR copy the required files from this [folder](./langs) to /opt/homebrew/share/tessdata/
+5. Adding alias for executing the script from terminal since there is no keyboard shortcut like Linux where you can open the terminal explicitly and run the script
+```zsh
+# Add this line into ~/.zshrc
+alias ocr='cd ~/PATH/TO/Screenshot2Text ; env/bin/python3 ocr.py'
+```
 
 ## How to use?
 1. Run the script
